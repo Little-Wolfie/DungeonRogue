@@ -16,11 +16,11 @@ public class UIManager : MonoBehaviour
 
     public void InitBars(float currentHP, float maxHP, float currentStam, float maxStam)
     {
-        healthBar.maxValue = currentHP;
-        staminaBar.maxValue = maxHP;
+        healthBar.maxValue = maxHP;
+        staminaBar.maxValue = maxStam;
 
-        healthBar.value = currentStam;
-        staminaBar.value = maxStam;
+        healthBar.value = currentHP;
+        staminaBar.value = currentStam;
     }
 
     public void UpdateHealthBarValue(float value)
