@@ -18,7 +18,18 @@ public class PlayerStats : MonoBehaviour
     private void Start()
     {
         ui = UIManager.instance;
+        LoadData();
         ui.InitBars(currentHP, maxHP, currentStam, maxStam);
+    }
+
+    void LoadData()
+    {
+        currentHP = DataManager.instance.GetSaveData().currentHP;
+    }
+
+    void SaveData()
+    {
+        DataManager.instance.GetSaveData().currentHP = currentHP;
     }
 
     public void UpdateCurrentHPValue(float value)
@@ -33,6 +44,7 @@ public class PlayerStats : MonoBehaviour
             currentHP = maxHP;
         }
 
+        SaveData();
         ui.UpdateHealthBarValue(currentHP);
     }
 
