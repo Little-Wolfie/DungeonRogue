@@ -5,6 +5,7 @@ using UnityEngine;
 public class TrapActivation : MonoBehaviour
 {
     public Animator animator;
+    public List<GameObject> objectsToEnable;
     bool isActive = false;
 
     private void OnTriggerEnter(Collider other)
@@ -16,6 +17,10 @@ public class TrapActivation : MonoBehaviour
             if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy"))
             {
                 animator.SetTrigger("activate");
+                foreach (GameObject go in objectsToEnable)
+                {
+                    go.SetActive(true);
+                }
             }
         }
     }
@@ -42,6 +47,10 @@ public class TrapActivation : MonoBehaviour
             if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy"))
             {
                 animator.SetTrigger("deactivate");
+                foreach (GameObject go in objectsToEnable)
+                {
+                    go.SetActive(false);
+                }
             }
         }
     }

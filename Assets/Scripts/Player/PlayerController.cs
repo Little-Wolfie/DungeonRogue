@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (isAlive)
+        if (isAlive && !UIManager.instance.isMenuOpen)
         {
             if (stats.currentStam <= 0)
             {
@@ -157,6 +157,11 @@ public class PlayerController : MonoBehaviour
             {
                 //Debug.Log("Lstick pressed");
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIManager.instance.ToggleOptionsMenu();
         }
 
         //debug cheat

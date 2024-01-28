@@ -31,10 +31,12 @@ public class DataManager : MonoBehaviour
     private SaveData _data;
     BinaryFormatter _formatter;
 
+    public float currentMasterVolume = 0.5f;
     public float currentMusicVolume = 0.5f;
     public float currentSFXVolume = 0.5f;
 
-    static string _MUSICVOLUMEKEY = "MVOLUME";
+    static string _MASTERVOLUMEKEY = "MASTERVOLUME";
+    static string _MUSICVOLUMEKEY = "MUSICVOLUME";
     static string _SFXVOLUMEKEY = "SFXVOLUME";
 
     private bool hasLoadedData = false;
@@ -113,8 +115,10 @@ public class DataManager : MonoBehaviour
     #endregion
 
     #region Settings
-    /*public void SaveSettings()
+    public void SaveSettings()
     {
+        PlayerPrefs.SetFloat(_MASTERVOLUMEKEY, currentMasterVolume);
+
         PlayerPrefs.SetFloat(_MUSICVOLUMEKEY, currentMusicVolume);
 
         PlayerPrefs.SetFloat(_SFXVOLUMEKEY, currentSFXVolume);
@@ -123,6 +127,17 @@ public class DataManager : MonoBehaviour
     public void LoadSettings()
     {
         OptionsManager ops = GetComponent<OptionsManager>();
+
+        if (PlayerPrefs.HasKey(_MASTERVOLUMEKEY))
+        {
+            float mVol = PlayerPrefs.GetFloat(_MASTERVOLUMEKEY);
+            ops.SetMasterVolume(mVol);
+            currentMasterVolume = mVol;
+        }
+        else
+        {
+            PlayerPrefs.SetFloat(_MASTERVOLUMEKEY, currentMasterVolume);
+        }
 
         if (PlayerPrefs.HasKey(_MUSICVOLUMEKEY))
         {
@@ -145,6 +160,6 @@ public class DataManager : MonoBehaviour
         {
             PlayerPrefs.SetFloat(_SFXVOLUMEKEY, currentSFXVolume);
         }
-    }*/
+    }
     #endregion
 }
