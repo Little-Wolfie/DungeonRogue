@@ -12,7 +12,8 @@ public class SoundManager : MonoBehaviour
     {
         Music,
         SFX,
-        UI
+        UI,
+        Ambient
     }
 
     [System.Serializable]
@@ -22,8 +23,8 @@ public class SoundManager : MonoBehaviour
         public SoundType type;
         public AudioClip clip;
         [Range(0, 1f)]
-        public float volume = 0.5f;
-        [Range(0.1f, 3f)]
+        public float volume = 1f;
+        [Range(-3f, 3f)]
         public float pitch = 1f;
 
         public bool loop;
@@ -34,25 +35,36 @@ public class SoundManager : MonoBehaviour
 
     public string currentPlayingMusic;
 
-    public AudioMixerGroup musicMixerGroup, sfxMixerGroup;
+    public AudioMixerGroup musicMixerGroup, sfxMixerGroup, uiMixerGroup, ambientMixerGroup;
 
-    public Sound[] sounds;
+    public Sound[] music, sfx, ui, ambient;
 
     private void Awake()
     {
         instance = this;
 
-        Init();
+        Init(music); Init(sfx); Init(ui); Init(ambient);
     }
 
-    private void Init()
+    private void Start()
+    {
+        Play("LandOfTheKnights", 0, 0, music);
+        Play("Dungeon3", 0, 0, ambient);
+    }
+
+    private void Init(Sound[] sounds)
     {
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
 
-            s.source.volume = s.volume; s.source.pitch = s.pitch;
+            s.source.volume = s.volume; 
+            s.source.pitch = s.pitch;
+            if (s.pitch == 0)
+            {
+                Debug.LogWarning(s.name + " pitch is zero!");
+            }
             s.source.loop = s.loop;
 
             if (s.type == SoundType.Music)
@@ -73,6 +85,24 @@ public class SoundManager : MonoBehaviour
                 }
                 s.source.outputAudioMixerGroup = sfxMixerGroup;
             }
+            else if (s.type == SoundType.UI)
+            {
+                if (uiMixerGroup == null)
+                {
+                    Debug.LogError("UI Mixer group not found");
+                    continue;
+                }
+                s.source.outputAudioMixerGroup = uiMixerGroup;
+            }
+            else if (s.type == SoundType.Ambient)
+            {
+                if (ambientMixerGroup == null)
+                {
+                    Debug.LogError("Ambient Mixer group not found");
+                    continue;
+                }
+                s.source.outputAudioMixerGroup = ambientMixerGroup;
+            }
         }
     }
 
@@ -80,13 +110,13 @@ public class SoundManager : MonoBehaviour
     {
         if (currentPlayingMusic != "")
         {
-            Stop(currentPlayingMusic);
+            Stop(currentPlayingMusic, music);
         }
 
-        Play(name);
+        Play(name, music);
     }
 
-    public void Play(string name)
+    public void Play(string name, Sound[] sounds)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
@@ -95,6 +125,7 @@ public class SoundManager : MonoBehaviour
             Debug.LogError("Play() - Sound not found: " + name);
             return;
         }
+
         s.source.volume = 0;
         s.source.Play();
         s.source.volume = s.volume;
@@ -105,7 +136,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void Play(string name, float pitch, float vol)
+    public void Play(string name, float pitch, float vol, Sound[] sounds)
     {
         //leave pitch and vol zero to just play a sound normally
 
@@ -143,7 +174,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void Stop(string name)
+    public void Stop(string name, Sound[] sounds)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
@@ -164,11 +195,9 @@ public class SoundManager : MonoBehaviour
 
         while (Time.time < _StartTime + _FadeLength)
         {
-
             s.source.volume = _StartVolume + ((_EndVolume - _StartVolume) * ((Time.time - _StartTime) / _FadeLength));
 
             yield return null;
-
         }
 
         if (_EndVolume == 0)

@@ -34,10 +34,14 @@ public class DataManager : MonoBehaviour
     public float currentMasterVolume = 0.5f;
     public float currentMusicVolume = 0.5f;
     public float currentSFXVolume = 0.5f;
+    public float currentUIVolume = 0.5f;
+    public float currentAmbientVolume = 0.5f;
 
     static string _MASTERVOLUMEKEY = "MASTERVOLUME";
     static string _MUSICVOLUMEKEY = "MUSICVOLUME";
     static string _SFXVOLUMEKEY = "SFXVOLUME";
+    static string _UIVOLUMEKEY = "UIVOLUME";
+    static string _AMBIENTVOLUMEKEY = "AMBIENTVOLUME";
 
     private bool hasLoadedData = false;
     public bool HasLoadedData()
@@ -122,18 +126,17 @@ public class DataManager : MonoBehaviour
         PlayerPrefs.SetFloat(_MUSICVOLUMEKEY, currentMusicVolume);
 
         PlayerPrefs.SetFloat(_SFXVOLUMEKEY, currentSFXVolume);
+
+        PlayerPrefs.SetFloat(_UIVOLUMEKEY, currentUIVolume);
+
+        PlayerPrefs.SetFloat(_AMBIENTVOLUMEKEY, currentAmbientVolume);
     }
 
     public void LoadSettings()
     {
-        OptionsManager ops = GetComponent<OptionsManager>();
-
         if (PlayerPrefs.HasKey(_MASTERVOLUMEKEY))
         {
             currentMasterVolume = PlayerPrefs.GetFloat(_MASTERVOLUMEKEY);
-            //float mVol = PlayerPrefs.GetFloat(_MASTERVOLUMEKEY);
-            //ops.SetMasterVolume(mVol);
-            //currentMasterVolume = mVol;
         }
         else
         {
@@ -142,9 +145,7 @@ public class DataManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey(_MUSICVOLUMEKEY))
         {
-            float mVol = PlayerPrefs.GetFloat(_MUSICVOLUMEKEY);
-            ops.SetMusicVolume(mVol);
-            currentMusicVolume = mVol;
+            currentMusicVolume = PlayerPrefs.GetFloat(_MUSICVOLUMEKEY);
         }
         else
         {
@@ -153,13 +154,29 @@ public class DataManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey(_SFXVOLUMEKEY))
         {
-            float sVol = PlayerPrefs.GetFloat(_SFXVOLUMEKEY);
-            ops.SetSFXVolume(sVol);
-            currentSFXVolume = sVol;
+            currentSFXVolume = PlayerPrefs.GetFloat(_SFXVOLUMEKEY);
         }
         else
         {
             PlayerPrefs.SetFloat(_SFXVOLUMEKEY, currentSFXVolume);
+        }
+
+        if (PlayerPrefs.HasKey(_UIVOLUMEKEY))
+        {
+            currentUIVolume = PlayerPrefs.GetFloat(_UIVOLUMEKEY);
+        }
+        else
+        {
+            PlayerPrefs.SetFloat(_UIVOLUMEKEY, currentUIVolume);
+        }
+
+        if (PlayerPrefs.HasKey(_AMBIENTVOLUMEKEY))
+        {
+            currentAmbientVolume = PlayerPrefs.GetFloat(_AMBIENTVOLUMEKEY);
+        }
+        else
+        {
+            PlayerPrefs.SetFloat(_AMBIENTVOLUMEKEY, currentAmbientVolume);
         }
     }
     #endregion

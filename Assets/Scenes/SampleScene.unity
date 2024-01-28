@@ -745,7 +745,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2142105725}
+        m_TargetAssemblyTypeName: OptionsManager, Player
+        m_MethodName: SetSFXVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &127422696
 RectTransform:
   m_ObjectHideFlags: 0
@@ -839,7 +851,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160019181}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2897841, y: 0.000000016468091, z: -0.0000000049861364, w: 0.95709205}
+  m_LocalRotation: {x: 0.2897841, y: -0.000000016468091, z: 0.0000000049861364, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1202,7 +1214,7 @@ GameObject:
   - component: {fileID: 312909568}
   - component: {fileID: 312909569}
   m_Layer: 5
-  m_Name: SFXVolSlider
+  m_Name: UIVolSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1280,7 +1292,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2142105725}
+        m_TargetAssemblyTypeName: OptionsManager, Player
+        m_MethodName: SetUIVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &318494515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,7 +1572,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: 0.000000042058502, z: -0.0000000174212, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268343, y: -0.000000042058502, z: 0.0000000174212, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 4.558, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2488,7 +2512,35 @@ MonoBehaviour:
     type: 2}
   sfxMixerGroup: {fileID: 8867381202399912869, guid: 0dd397b7843306a4cb020960849f8bee,
     type: 2}
-  sounds: []
+  uiMixerGroup: {fileID: -7615770770637942652, guid: 0dd397b7843306a4cb020960849f8bee,
+    type: 2}
+  ambientMixerGroup: {fileID: -6908348830803913726, guid: 0dd397b7843306a4cb020960849f8bee,
+    type: 2}
+  music:
+  - name: LandOfTheKnights
+    type: 0
+    clip: {fileID: 8300000, guid: 1eb9c36910b217f4295044a92702f0b9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  sfx: []
+  ui:
+  - name: OpenInventory
+    type: 2
+    clip: {fileID: 8300000, guid: f6f44b50423ffc24cb3dcf53e6158f11, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  ambient:
+  - name: Dungeon3
+    type: 3
+    clip: {fileID: 8300000, guid: 53e0ca19aaab94849ae4724cd586d67c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!4 &454395325
 Transform:
   m_ObjectHideFlags: 0
@@ -2700,12 +2752,12 @@ GameObject:
   m_Component:
   - component: {fileID: 476195809}
   m_Layer: 5
-  m_Name: SFXVol (1)
+  m_Name: AmbientVol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &476195809
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3797,7 +3849,7 @@ GameObject:
   - component: {fileID: 549645889}
   - component: {fileID: 549645888}
   m_Layer: 5
-  m_Name: SFXVolLabel
+  m_Name: AmbientVolLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3842,7 +3894,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SFX
+  m_text: Ambient
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4862,6 +4914,8 @@ MonoBehaviour:
   masterVol: {fileID: 1659399842}
   musicVol: {fileID: 1255953932}
   SFXVol: {fileID: 127422695}
+  UIVol: {fileID: 312909569}
+  ambientVol: {fileID: 1116005394}
 --- !u!4 &760592132
 Transform:
   m_ObjectHideFlags: 0
@@ -5600,7 +5654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875326960}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.33618647, y: 0.000000016204893, z: -0.000000005784554, w: 0.94179547}
+  m_LocalRotation: {x: 0.33618647, y: -0.000000016204888, z: 0.000000005784552, w: 0.94179547}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5804,12 +5858,12 @@ GameObject:
   m_Component:
   - component: {fileID: 970253024}
   m_Layer: 5
-  m_Name: SFXVol (2)
+  m_Name: UIVol (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &970253024
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6236,7 +6290,7 @@ GameObject:
   - component: {fileID: 1116005393}
   - component: {fileID: 1116005394}
   m_Layer: 5
-  m_Name: SFXVolSlider
+  m_Name: AmbientVolSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6314,7 +6368,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2142105725}
+        m_TargetAssemblyTypeName: OptionsManager, Player
+        m_MethodName: SetAmbientVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1145036611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6960,7 +7026,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2142105725}
+        m_TargetAssemblyTypeName: OptionsManager, Player
+        m_MethodName: SetMusicVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1259299456
 GameObject:
   m_ObjectHideFlags: 0
@@ -8061,7 +8139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493755338}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: 0.000000015896624, z: -0.0000000065845964, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268343, y: -0.000000015896621, z: 0.000000006584596, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11527,7 +11605,7 @@ GameObject:
   - component: {fileID: 1941370762}
   - component: {fileID: 1941370761}
   m_Layer: 5
-  m_Name: SFXVolLabel
+  m_Name: UIVolLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11572,7 +11650,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SFX
+  m_text: UI
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12549,6 +12627,8 @@ MonoBehaviour:
   currentMasterVolume: 0.5
   currentMusicVolume: 0.5
   currentSFXVolume: 0.5
+  currentUIVolume: 0.5
+  currentAmbientVolume: 0.5
 --- !u!4 &2142105724
 Transform:
   m_ObjectHideFlags: 0
@@ -12583,7 +12663,7 @@ MonoBehaviour:
     type: 2}
   musicMixer: {fileID: 851705127292248082, guid: 0dd397b7843306a4cb020960849f8bee,
     type: 2}
-  sfxMixer: {fileID: 8867381202399912869, guid: 0dd397b7843306a4cb020960849f8bee,
+  SFXMixer: {fileID: 8867381202399912869, guid: 0dd397b7843306a4cb020960849f8bee,
     type: 2}
 --- !u!1 &23708721644901383
 GameObject:

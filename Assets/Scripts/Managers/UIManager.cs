@@ -14,17 +14,17 @@ public class UIManager : MonoBehaviour
     public Slider healthBar;
     public Slider staminaBar;
 
-    public Slider masterVol, musicVol, SFXVol;
+    public Slider masterVol, musicVol, SFXVol, UIVol, ambientVol;
 
     private void Awake()
     {
         instance = this; 
     }
 
-
-
     public void ToggleOptionsMenu()
     {
+        SoundManager.instance.Play("OpenInventory", 0, 0, SoundManager.instance.ui);
+
         optionsPanel.SetActive(!optionsPanel.activeInHierarchy);
         isMenuOpen = optionsPanel.activeInHierarchy;
         cameraControlsObject.SetActive(!optionsPanel.activeInHierarchy);
