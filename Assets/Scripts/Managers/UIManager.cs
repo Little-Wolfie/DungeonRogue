@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 
     public GameObject optionsPanel;
     public bool isMenuOpen = false;
+    public GameObject cameraControlsObject;
 
     public Slider healthBar;
     public Slider staminaBar;
@@ -20,10 +21,13 @@ public class UIManager : MonoBehaviour
         instance = this; 
     }
 
+
+
     public void ToggleOptionsMenu()
     {
         optionsPanel.SetActive(!optionsPanel.activeInHierarchy);
         isMenuOpen = optionsPanel.activeInHierarchy;
+        cameraControlsObject.SetActive(!optionsPanel.activeInHierarchy);
 
         if (optionsPanel.activeInHierarchy)
         {

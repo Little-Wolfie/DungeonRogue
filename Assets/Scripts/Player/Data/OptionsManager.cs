@@ -9,10 +9,35 @@ public class OptionsManager : MonoBehaviour
 {
     public AudioMixerGroup masterMixer, UIMixer, ambientMixer, musicMixer, sfxMixer;
 
+    private void Start()
+    {
+        SetOptionsUI();
+        ApplySettings();
+    }
+
+    public void SetMasterVolume()
+    {
+        if (UIManager.instance.masterVol.value <= 0)
+        {
+            masterMixer.audioMixer.SetFloat("MasterVolume", -80);
+        }
+        else
+        {
+            masterMixer.audioMixer.SetFloat("MasterVolume", Mathf.Log10(UIManager.instance.masterVol.value) * 20);
+        }
+        
+        DataManager.instance.currentMasterVolume = UIManager.instance.masterVol.value;
+    }
     public void SetMasterVolume(float vol)
     {
-        masterMixer.audioMixer.SetFloat("MasterVolume", Mathf.Log10(vol) * 20);
-        DataManager.instance.currentMasterVolume = vol;
+        if (vol <= 0)
+        {
+            masterMixer.audioMixer.SetFloat("MasterVolume", -80);
+        }
+        else
+        {
+            masterMixer.audioMixer.SetFloat("MasterVolume", Mathf.Log10(vol) * 20);
+        }
     }
 
     public void SetMusicVolume(float vol)
@@ -34,10 +59,10 @@ public class OptionsManager : MonoBehaviour
         SetSFXVolume(DataManager.instance.currentSFXVolume);
     }
 
-    public void SetOptionsUI(Slider master, Slider mVol, Slider sVol)
+    public void SetOptionsUI()
     {
-        master.value = DataManager.instance.currentMasterVolume;
-        mVol.value = DataManager.instance.currentMusicVolume;
-        sVol.value = DataManager.instance.currentSFXVolume;
+        UIManager.instance.masterVol.value = DataManager.instance.currentMasterVolume;
+        UIManager.instance.musicVol.value = DataManager.instance.currentMusicVolume;
+        UIManager.instance.SFXVol.value = DataManager.instance.currentSFXVolume;
     }
 }

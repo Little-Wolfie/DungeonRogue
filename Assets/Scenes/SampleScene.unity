@@ -839,7 +839,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160019181}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2897841, y: -0.000000016468091, z: 0.0000000049861364, w: 0.95709205}
+  m_LocalRotation: {x: 0.2897841, y: 0.000000016468091, z: -0.0000000049861364, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4855,6 +4855,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsPanel: {fileID: 1592242910}
+  isMenuOpen: 0
+  cameraControlsObject: {fileID: 1778541027}
   healthBar: {fileID: 1304884246}
   staminaBar: {fileID: 1459042333}
   masterVol: {fileID: 1659399842}
@@ -8059,7 +8061,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493755338}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: 0.000000015896623, z: -0.000000006584596, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268343, y: 0.000000015896624, z: -0.0000000065845964, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9050,59 +9052,6 @@ Transform:
   - {fileID: 85784505}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1623338728
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1623338730}
-  - component: {fileID: 1623338729}
-  m_Layer: 0
-  m_Name: OptionsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1623338729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623338728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d002befc011bfcd4ebc181cae661f16a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  masterMixer: {fileID: 24300002, guid: 0dd397b7843306a4cb020960849f8bee, type: 2}
-  UIMixer: {fileID: -7615770770637942652, guid: 0dd397b7843306a4cb020960849f8bee,
-    type: 2}
-  ambientMixer: {fileID: -6908348830803913726, guid: 0dd397b7843306a4cb020960849f8bee,
-    type: 2}
-  musicMixer: {fileID: 851705127292248082, guid: 0dd397b7843306a4cb020960849f8bee,
-    type: 2}
-  sfxMixer: {fileID: 8867381202399912869, guid: 0dd397b7843306a4cb020960849f8bee,
-    type: 2}
---- !u!4 &1623338730
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623338728}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1628722515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9525,13 +9474,13 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 2142105725}
+        m_TargetAssemblyTypeName: OptionsManager, Player
+        m_MethodName: SetMasterVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -12574,6 +12523,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2142105724}
   - component: {fileID: 2142105723}
+  - component: {fileID: 2142105725}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -12614,6 +12564,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2142105725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142105722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d002befc011bfcd4ebc181cae661f16a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterMixer: {fileID: 24300002, guid: 0dd397b7843306a4cb020960849f8bee, type: 2}
+  UIMixer: {fileID: -7615770770637942652, guid: 0dd397b7843306a4cb020960849f8bee,
+    type: 2}
+  ambientMixer: {fileID: -6908348830803913726, guid: 0dd397b7843306a4cb020960849f8bee,
+    type: 2}
+  musicMixer: {fileID: 851705127292248082, guid: 0dd397b7843306a4cb020960849f8bee,
+    type: 2}
+  sfxMixer: {fileID: 8867381202399912869, guid: 0dd397b7843306a4cb020960849f8bee,
+    type: 2}
 --- !u!1 &23708721644901383
 GameObject:
   m_ObjectHideFlags: 0
@@ -18781,7 +18752,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 37455175}
   - {fileID: 2142105724}
-  - {fileID: 1623338730}
   - {fileID: 454395325}
   - {fileID: 760592132}
   - {fileID: 1697043291}

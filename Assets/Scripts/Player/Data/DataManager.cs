@@ -50,13 +50,13 @@ public class DataManager : MonoBehaviour
         instance = this;
 
         Load();
-        //LoadSettings();
+        LoadSettings();
     }
 
     private void OnApplicationQuit()
     {
         Save();
-        //SaveSettings();
+        SaveSettings();
     }
 
     #region Data
@@ -130,9 +130,10 @@ public class DataManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey(_MASTERVOLUMEKEY))
         {
-            float mVol = PlayerPrefs.GetFloat(_MASTERVOLUMEKEY);
-            ops.SetMasterVolume(mVol);
-            currentMasterVolume = mVol;
+            currentMasterVolume = PlayerPrefs.GetFloat(_MASTERVOLUMEKEY);
+            //float mVol = PlayerPrefs.GetFloat(_MASTERVOLUMEKEY);
+            //ops.SetMasterVolume(mVol);
+            //currentMasterVolume = mVol;
         }
         else
         {
