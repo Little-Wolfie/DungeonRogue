@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class PlayerController : MonoBehaviour
 {
@@ -91,6 +92,12 @@ public class PlayerController : MonoBehaviour
     bool hasRegenStarted = false;
     #endregion
 
+    public AudioSource rollSound, jumpSound;
+
+    public AudioSource[] swordWooshes;
+
+    public MultiAimConstraint headAim;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -175,6 +182,7 @@ public class PlayerController : MonoBehaviour
             {
                 animator.SetTrigger("backAlive");
                 isAlive = true;
+                headAim.weight = 1f;
             }
         }
     }
@@ -245,6 +253,7 @@ public class PlayerController : MonoBehaviour
                     isAlive = false;
                     int t = Random.Range(0, deathTriggerNames.Count);
                     animator.SetTrigger(deathTriggerNames[t]);
+                    headAim.weight = 0f;
                 }
                 else
                 {
@@ -258,7 +267,7 @@ public class PlayerController : MonoBehaviour
     #region PlayerControls
     void Sprint()
     {
-        if (stats.currentStam > sprintStamDrainAmount)
+        if (stats.currentStam >= Mathf.Abs(sprintStamDrainAmount))
         {
             if (Input.GetButtonDown("L3") || Input.GetKeyDown(KeyCode.LeftShift))
             {
@@ -312,6 +321,10 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump"))
             {
+                float r = Random.Range(0.8f, 1.5f);
+                jumpSound.pitch = r;
+                jumpSound.Play();
+
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 animator.SetTrigger("jump");
                 stats.UpdateCurrentStamValue(jumpStaminaDrainAmount);
@@ -359,6 +372,9 @@ public class PlayerController : MonoBehaviour
         {
             if (RTriggerPulled())
             {
+                int r = Random.Range(0, swordWooshes.Length);
+                swordWooshes[r].Play();
+
                 isAttacking = true;
                 StartCoroutine(AttackCooldown());
                 animator.SetTrigger(basicAttackComboTriggerNames[basicAttackCount]);
@@ -374,6 +390,9 @@ public class PlayerController : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(0))
             {
+                int r = Random.Range(0, swordWooshes.Length);
+                swordWooshes[r].Play();
+
                 isAttacking = true;
                 StartCoroutine(AttackCooldown());
                 animator.SetTrigger(basicAttackComboTriggerNames[basicAttackCount]);
@@ -401,6 +420,10 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire2") && dir.magnitude > 0.1f)
             {
+                float r = Random.Range(0.8f, 1.5f);
+                rollSound.pitch = r;
+                rollSound.Play();
+
                 isRolling = true;
                 //Debug.Log("Fire2 pressed");
                 animator.SetTrigger("roll");
